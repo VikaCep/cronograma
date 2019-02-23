@@ -14,7 +14,7 @@ const App = () => {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
 
-          <Route path="/" component={WhatsToday} />
+          <Route exact path="/" component={WhatsToday} />
           <Route path="/porosity" component={PorositySelector} />
           <Route path="/days" component={DaysSelector} />
           <Route path="/week" component={WeekSelector} />

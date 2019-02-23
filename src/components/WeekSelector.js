@@ -5,6 +5,7 @@ import UserParameters from '../models/UserParameters.ts';
 const WeekSelector = () => {
   const userParameters = UserParameters.Instance;
   const [weekNumber, setWeekNumber] = useState(1);
+  userParameters.setWeek(1);
   const weeks = [1, 2, 3, 4];
 
   const handleClick = (e, week) => {
