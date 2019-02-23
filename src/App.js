@@ -5,18 +5,23 @@ import './App.scss';
 import PorositySelector from './components/PorositySelector';
 import DaysSelector from './components/DaysSelector';
 import WeekSelector from './components/WeekSelector';
+import WhatsToday from './components/WhatsToday';
 
-const App = () => (
-  <Router>
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Route path="/porosity" component={PorositySelector} />
-        <Route path="/days" component={DaysSelector} />
-        <Route path="/week" component={WeekSelector} />
+const App = () => {
+  return (
+    <Router>
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+
+          <Route path="/" component={WhatsToday} />
+          <Route path="/porosity" component={PorositySelector} />
+          <Route path="/days" component={DaysSelector} />
+          <Route path="/week" component={WeekSelector} />
+        </div>
       </div>
-    </div>
-  </Router>
-);
+    </Router>
+  );
+};
 
 export default App;

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import UserParameters from '../models/UserParameters.ts';
 
 const PorositySelector = () => {
+  const userParameters = UserParameters.Instance;
   const [porosity, setPorosity] = useState('');
   const porosities = [
     {
@@ -11,6 +13,12 @@ const PorositySelector = () => {
     { name: 'Media', key: 'medium' },
     { name: 'Alta', key: 'high' }
   ];
+
+  const handleClick = (e, porosity) => {
+    e.preventDefault();
+    setPorosity(porosity);
+    userParameters.setPorosity(porosity);
+  };
 
   return (
     <div>
@@ -24,7 +32,7 @@ const PorositySelector = () => {
             className={`list-group-item list-group-item-action ${
               porosity === p.key ? 'active' : ''
             }`}
-            onClick={() => setPorosity(p.key)}
+            onClick={e => handleClick(e, p.key)}
           >
             {p.name}
           </a>

@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import UserParameters from '../models/UserParameters.ts';
 
 const WeekSelector = () => {
+  const userParameters = UserParameters.Instance;
   const [weekNumber, setWeekNumber] = useState(1);
   const weeks = [1, 2, 3, 4];
 
   const handleClick = (e, week) => {
     e.preventDefault();
     setWeekNumber(week);
+    userParameters.setWeek(week);
   };
 
   return (
     <div>
-      <p>
+      <div>
         <p>
           Si recien comienzas, deja seleccionada la semana{' '}
           <strong>uno (1)</strong>
@@ -21,7 +24,7 @@ const WeekSelector = () => {
           Si por lo contrario ya comenzaste el cronograma, selecciona por cuál
           semana vas.
         </p>
-      </p>
+      </div>
 
       <ul className="list-group">
         {weeks.map(number => (
