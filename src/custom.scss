@@ -1,0 +1,21 @@
+//color palette
+$red: #ef3d59;
+$orange: #e17a47;
+$yellow: #efc958;
+$green: #4ab19d;
+$blue: #344a5c;
+
+// Override default variables before the import
+$body-bg: $yellow;
+$body-color: $blue;
+
+$theme-colors: (
+  'primary': $blue,
+  'secondary': $yellow,
+  'success': $green,
+  'danger': $red,
+  'warning': $orange
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';

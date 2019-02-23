@@ -1,18 +1,20 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import logo from "./img/hair.svg";
-import "./App.css";
-import PorositySelector from "./PorositySelector";
-import DaysSelector from "./DaysSelector";
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import logo from './img/towel-girl.png';
+import './App.scss';
+import PorositySelector from './components/PorositySelector';
+import DaysSelector from './components/DaysSelector';
+import WeekSelector from './components/WeekSelector';
 
 const App = () => (
   <Router>
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Route exact path="/" component={PorositySelector} />
+        <Route path="/porosity" component={PorositySelector} />
         <Route path="/days" component={DaysSelector} />
-      </header>
+        <Route path="/week" component={WeekSelector} />
+      </div>
     </div>
   </Router>
 );
