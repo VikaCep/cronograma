@@ -1,28 +1,30 @@
+import Cookies from 'universal-cookie';
+
 class UserParameters {
-  private saved: boolean;
-  private days: string[];
-  private week: number;
-  private porosity: string;
+  public days: string[];
+  public week: number;
+  public porosity: string;
+  private cookies: Cookies;
 
   private static _instance: UserParameters = new UserParameters();
 
   private constructor() {
-    this.porosity = null;
-    this.days = null;
-    this.week = null;
-    this.saved = false;
+    this.cookies = new Cookies();
+    this.porosity = this.cookies.get('porosity') || '';
+    this.days = this.cookies.get('days') || [];
+    this.week = this.cookies.get('week') || 1;
   }
 
   public static get Instance() {
     return this._instance || (this._instance = new this());
   }
 
-  areAllParametersSet() {
-    return this.porosity && this.days && this.week;
-  }
-
   public get hasSavedParameters() {
-    return this.saved;
+    return (
+      this.cookies.get('porosity') &&
+      this.cookies.get('days') &&
+      this.cookies.get('week')
+    );
   }
 
   /**
@@ -30,9 +32,7 @@ class UserParameters {
    */
   public setPorosity(porosity: string) {
     this.porosity = porosity;
-    if (this.areAllParametersSet()) {
-      this.saveInStorage();
-    }
+    this.cookies.set('porosity', porosity);
   }
 
   /**
@@ -40,9 +40,7 @@ class UserParameters {
    */
   public setDays(days: string[]) {
     this.days = days;
-    if (this.areAllParametersSet()) {
-      this.saveInStorage();
-    }
+    this.cookies.set('days', days);
   }
 
   /**
@@ -50,14 +48,7 @@ class UserParameters {
    */
   public setWeek(week: number) {
     this.week = week;
-    if (this.areAllParametersSet()) {
-      this.saveInStorage();
-    }
-  }
-
-  public saveInStorage() {
-    //save in local storage or db
-    this.saved = true;
+    this.cookies.set('week', week);
   }
 }
 
