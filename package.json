@@ -2,6 +2,10 @@
   "name": "cronograma-rulos",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "5.6.0",
+    "node": "8.11.2"
+  },
   "dependencies": {
     "@types/universal-cookie": "^2.2.0",
     "bootstrap": "^4.3.1",
