@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserParameters from '../models/UserParameters.ts';
 
+const userParameters = UserParameters.Instance;
+const porosities = [
+  {
+    name: 'Baja',
+    key: 'low'
+  },
+  { name: 'Media', key: 'medium' },
+  { name: 'Alta', key: 'high' }
+];
+
 const PorositySelector = () => {
-  const userParameters = UserParameters.Instance;
   const [porosity, setPorosity] = useState('');
-  const porosities = [
-    {
-      name: 'Baja',
-      key: 'low'
-    },
-    { name: 'Media', key: 'medium' },
-    { name: 'Alta', key: 'high' }
-  ];
 
   const handleClick = (e, porosity) => {
     e.preventDefault();

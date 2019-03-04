@@ -47,8 +47,8 @@ class UserParameters {
    * The schedule starting week
    */
   public setWeek(week: number) {
-    this.week = week;
-    this.cookies.set('week', week);
+    this.week = +week;
+    this.cookies.set('week', this.week);
   }
 
   /**

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserParameters from '../models/UserParameters.ts';
 
+const userParameters = UserParameters.Instance;
+
 const DaysSelector = () => {
-  const userParameters = UserParameters.Instance;
   const [days, setDays] = useState([]);
   const selectedDays = [].concat(days);
 

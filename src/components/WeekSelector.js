@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserParameters from '../models/UserParameters.ts';
 
-const WeekSelector = () => {
-  const userParameters = UserParameters.Instance;
-  const [weekNumber, setWeekNumber] = useState(1);
-  userParameters.setWeek(1);
-  const weeks = [1, 2, 3, 4];
+const weeks = [1, 2, 3, 4];
+const userParameters = UserParameters.Instance;
 
+const WeekSelector = () => {
+  const [weekNumber, setWeekNumber] = useState(1);
   const handleClick = (e, week) => {
     e.preventDefault();
     setWeekNumber(week);

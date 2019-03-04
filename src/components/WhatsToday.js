@@ -6,10 +6,9 @@ import Schedule from '../models/Schedule.ts';
 const days = ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'];
 const today = days[new Date().getDay()];
 let whatsToday = '';
+const userParameters = UserParameters.Instance;
 
 const WhatsToday = () => {
-  const userParameters = UserParameters.Instance;
-
   const [resetPrefs, setResetPrefs] = useState(false);
 
   if (!userParameters.hasSavedParameters) {
