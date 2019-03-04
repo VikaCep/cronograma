@@ -12,7 +12,7 @@ class UserParameters {
     this.cookies = new Cookies();
     this.porosity = this.cookies.get('porosity') || '';
     this.days = this.cookies.get('days') || [];
-    this.week = this.cookies.get('week') || 1;
+    this.week = +this.cookies.get('week') || 1;
   }
 
   public static get Instance() {
@@ -49,18 +49,31 @@ class UserParameters {
   public setWeek(week: number) {
     this.week = +week;
     this.cookies.set('week', this.week);
+    this.cookies.set('startingDate', new Date());
+  }
+
+  public get currentWeek() {
+    const today = new Date();
+    const startingDate = new Date(this.cookies.get('startingDate'));
+    const totalDays =
+      Math.abs(startingDate.getTime() - today.getTime()) /
+      (1000 * 60 * 60 * 24);
+    let currentWeek = Math.floor(totalDays / 7);
+    currentWeek = currentWeek + this.week;
+    //start again
+    if (currentWeek > 4) {
+      currentWeek = currentWeek % 4 || 4;
+    }
+    return currentWeek;
   }
 
   /**
    * Reset saved values
    */
   public reset() {
-    this.porosity = '';
-    this.days = [];
-    this.week = 1;
-    this.cookies.set('porosity', this.porosity);
-    this.cookies.set('days', this.days);
-    this.cookies.set('week', this.week);
+    this.setWeek(1);
+    this.setPorosity('');
+    this.setDays([]);
   }
 }
 

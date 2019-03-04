@@ -22,7 +22,7 @@ const WhatsToday = () => {
   } else {
     const weekRoutine = Schedule.getForPorosityAndWeek(
       userParameters.porosity,
-      userParameters.week
+      userParameters.currentWeek
     );
     whatsToday = weekRoutine[washingDayIndex];
   }
@@ -38,6 +38,12 @@ const WhatsToday = () => {
       <div className="lead">
         Hoy te toca: <h3 className="text-success">{whatsToday}</h3>
       </div>
+      {washingDayIndex > -1 && (
+        <div>
+          Vas por el lavado {washingDayIndex + 1} de la semana{' '}
+          {userParameters.currentWeek}
+        </div>
+      )}
       <div>
         <button
           onClick={e => handleResetClick(e)}
