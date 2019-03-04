@@ -50,6 +50,18 @@ class UserParameters {
     this.week = week;
     this.cookies.set('week', week);
   }
+
+  /**
+   * Reset saved values
+   */
+  public reset() {
+    this.porosity = '';
+    this.days = [];
+    this.week = 1;
+    this.cookies.set('porosity', this.porosity);
+    this.cookies.set('days', this.days);
+    this.cookies.set('week', this.week);
+  }
 }
 
 export default UserParameters;

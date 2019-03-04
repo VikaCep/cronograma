@@ -40,10 +40,11 @@ const DaysSelector = () => {
   return (
     <div>
       <p>
-        Selecciona <strong>tres (3)</strong> días donde realizaras las máscaras:
+        Selecciona <strong>tres</strong> días donde realizaras las máscaras
       </p>
+      <small>Se deben seleccionar en orden</small>
 
-      <ul className="list-group">
+      <ul className="list-group mt-3">
         {weekDays.map(day => (
           <a
             href="#"

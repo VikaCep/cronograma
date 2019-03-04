@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import UserParameters from '../models/UserParameters.ts';
 import Schedule from '../models/Schedule.ts';
@@ -10,13 +10,15 @@ let whatsToday = '';
 const WhatsToday = () => {
   const userParameters = UserParameters.Instance;
 
+  const [resetPrefs, setResetPrefs] = useState(false);
+
   if (!userParameters.hasSavedParameters) {
     return <Redirect to="/porosity" />;
   }
   const days = userParameters.days;
   const washingDayIndex = days.indexOf(today);
 
-  if (washingDayIndex === undefined) {
+  if (washingDayIndex === -1) {
     whatsToday = 'Nada! Hoy no es dia de lavado :)';
   } else {
     const weekRoutine = Schedule.getForPorosityAndWeek(
@@ -26,11 +28,26 @@ const WhatsToday = () => {
     whatsToday = weekRoutine[washingDayIndex];
   }
 
+  const handleResetClick = e => {
+    e.preventDefault();
+    userParameters.reset();
+    setResetPrefs(true);
+  };
+
   return (
     <div>
-      <p class="lead">
-        Hoy te toca: <h3 class="text-success">{whatsToday}</h3>
-      </p>
+      <div className="lead">
+        Hoy te toca: <h3 className="text-success">{whatsToday}</h3>
+      </div>
+      <div>
+        <button
+          onClick={e => handleResetClick(e)}
+          className="btn btn-primary mt-5"
+        >
+          Volver a ingresar preferencias
+        </button>
+      </div>
+      {resetPrefs && <Redirect to="/porosity" />}
     </div>
   );
 };
