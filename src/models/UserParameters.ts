@@ -4,11 +4,13 @@ class UserParameters {
   public days: string[];
   public week: number;
   public porosity: string;
+  public weekDays: string[];
   private cookies: Cookies;
 
   private static _instance: UserParameters = new UserParameters();
 
   private constructor() {
+    this.weekDays = ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'];
     this.cookies = new Cookies();
     this.porosity = this.cookies.get('porosity') || '';
     this.days = this.cookies.get('days') || [];
@@ -19,6 +21,12 @@ class UserParameters {
     const day = today.getDay();
     const diff = today.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
     return new Date(today.setDate(diff));
+  }
+
+  private sortDays(days: string[]) {
+    return days.sort(
+      (a, b) => this.weekDays.indexOf(a) - this.weekDays.indexOf(b)
+    );
   }
 
   public static get Instance() {
@@ -45,8 +53,8 @@ class UserParameters {
    * The days of the week that the hairwash will be made
    */
   public setDays(days: string[]) {
-    this.days = days;
-    this.cookies.set('days', days);
+    this.days = this.sortDays(days);
+    this.cookies.set('days', this.days);
   }
 
   /**

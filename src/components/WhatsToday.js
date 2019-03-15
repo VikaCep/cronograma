@@ -3,10 +3,10 @@ import { Redirect } from 'react-router-dom';
 import UserParameters from '../models/UserParameters.ts';
 import Schedule from '../models/Schedule.ts';
 
-const days = ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'];
-const today = days[new Date().getDay()];
 let whatsToday = '';
 const userParameters = UserParameters.Instance;
+const days = userParameters.weekDays;
+const today = days[new Date().getDay()];
 
 const WhatsToday = () => {
   const [resetPrefs, setResetPrefs] = useState(false);
