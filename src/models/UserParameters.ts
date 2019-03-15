@@ -15,6 +15,12 @@ class UserParameters {
     this.week = +this.cookies.get('week') || 1;
   }
 
+  private getMonday(today: Date) {
+    const day = today.getDay();
+    const diff = today.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+    return new Date(today.setDate(diff));
+  }
+
   public static get Instance() {
     return this._instance || (this._instance = new this());
   }
@@ -49,7 +55,8 @@ class UserParameters {
   public setWeek(week: number) {
     this.week = +week;
     this.cookies.set('week', this.week);
-    this.cookies.set('startingDate', new Date());
+    // set the first day of the week as starting date
+    this.cookies.set('startingDate', this.getMonday(new Date()));
   }
 
   public get currentWeek() {
