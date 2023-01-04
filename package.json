@@ -17,7 +17,7 @@
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
+    "react-scripts": "5.0.1",
     "typescript": "^3.3.3333",
     "universal-cookie": "^3.0.7"
   },
